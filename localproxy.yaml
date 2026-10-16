@@ -1,15 +1,23 @@
+port: 7890
+socks-port: 7891
+allow-lan: false
+mode: rule
+
 proxy-groups:
-  - name: 代理选择
+  - name: "UDP-Blocker"
+  # 关键点：创建一个专用的拦截组，里面不放任何节点，直接用 REJECT
+    type: select
+    proxies:
+      - REJECT
+
+  - name: "代理选择"
     type: select
     proxies:
       - DIRECT
-      - Local-Proxy
-proxies:
-  - name: Local-Proxy
-    type: socks5
-    udp: false
-    server: 127.0.0.1
-    port: 7890
+
 rules:
-  - NETWORK,UDP,REJECT
-  - MATCH,代理选择
+  # 1. 强行把所有 UDP 流量抓进拦截组，直接本地 REJECT（绝不放过，也不会触发死循环）
+  - NETWORK,udp,UDP-Blocker
+
+  # 2. 其他正常的 TCP 流量走你的直连或代理选择
+  - MATCH, 代理选择
