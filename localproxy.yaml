@@ -1,1 +1,14 @@
-
+proxy-groups:
+  - name: 代理选择
+    type: select
+    proxies:
+      - DIRECT
+      - Local-Proxy
+proxies:
+  - name: Local-Proxy
+    type: socks5
+    udp: true
+    server: 127.0.0.1
+    port: 7890
+rules:
+  - MATCH,代理选择
