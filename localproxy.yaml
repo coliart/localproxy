@@ -7,7 +7,7 @@ proxy-groups:
 proxies:
   - name: Local-Proxy
     type: socks5
-    udp: true
+    udp: false
     server: 127.0.0.1
     port: 7890
 rules:
