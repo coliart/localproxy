@@ -11,4 +11,5 @@ proxies:
     server: 127.0.0.1
     port: 7890
 rules:
+  - NETWORK,UDP,REJECT
   - MATCH,代理选择
