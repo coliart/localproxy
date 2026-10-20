@@ -19,6 +19,11 @@ rules:
   # 1. 强行把所有 UDP 流量抓进拦截组，直接本地 REJECT（绝不放过，也不会触发死循环）
   # - NETWORK,udp,UDP-Blocker
   - NETWORK,udp,REJECT-DROP
+  - IP-CIDR,101.35.0.0/16,REJECT-DROP
+  - IP-CIDR,1.15.0.0/16,REJECT-DROP
+  - IP-CIDR,175.24.0.0/16,REJECT-DROP
+  - IP-CIDR,150.158.0.0/16,REJECT-DROP
+  - IP-CIDR,42.192.0.0/16,REJECT-DROP
 
   # 2. 其他正常的 TCP 流量走你的直连或代理选择
   - MATCH, 代理选择
