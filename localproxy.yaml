@@ -14,6 +14,17 @@ proxy-groups:
     type: select
     proxies:
       - DIRECT
+      - GE
+
+proxies:
+  - name: GE
+    server: 5.175.205.190
+    port: 27774 
+    type: vless
+    udp: false
+    uuid: 653137c6-474e-4a3d-9a20-5a5afb3d4a4f
+    tls: false
+    network: tcp
 
 rules:
   # 1. 强行把所有 UDP 流量抓进拦截组，直接本地 REJECT（绝不放过，也不会触发死循环）
@@ -21,4 +32,4 @@ rules:
   - NETWORK,udp,REJECT-DROP
 
   # 2. 其他正常的 TCP 流量走你的直连或代理选择
-  - MATCH, 代理选择
+  - MATCH, GE
