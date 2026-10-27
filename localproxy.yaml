@@ -30,6 +30,8 @@ rules:
   # 1. 强行把所有 UDP 流量抓进拦截组，直接本地 REJECT（绝不放过，也不会触发死循环）
   # - NETWORK,udp,UDP-Blocker
   # - IP-CIDR,162.62.97.37/32,DIRECT
+  - IP-CIDR,101.33.49.153/32,DIRECT
+  - IP-CIDR,124.156.126.171/32,DIRECT
   - NETWORK,udp,REJECT-DROP
 
   # 2. 其他正常的 TCP 流量走你的直连或代理选择
